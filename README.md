@@ -1,8 +1,10 @@
-# React + Vite
+# Tech info
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is part of a series of mini-projects it was made with React, Tailwind and EmailJs for our second week of React in the campus.
 
-Currently, two official plugins are available:
+## What is it ?
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+It's an app that allows you to send reviews through email suing EmailJs.
+
+## Want to check it online?
+Here you are [MultiStepForm](https://multistepform-ttre.onrender.com/)
