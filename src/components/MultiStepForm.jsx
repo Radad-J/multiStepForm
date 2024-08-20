@@ -27,9 +27,9 @@ const MultiStepForm = () => {
   };
 
   const sendEmail = () => {
-    const serviceID = 'service_3d4toci';
-    const templateID = 'template_cygpec2';
-    const userID = 'U9Snkk7BOs-HNEwxZ';
+    const serviceID = import.meta.env.VITE_SERVICE_ID;
+    const templateID = import.meta.env.VITE_TEMPLATE_ID;
+    const userID = import.meta.env.VITE_PUBLIC_KEY;
 
     emailjs.send(serviceID, templateID, formData, userID)
       .then((response) => {
