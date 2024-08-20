@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Step1 from './Step1';
 import Step2 from './Step2';
 import Step3 from './Step3';
+import emailjs from 'emailjs-com';
 
 const MultiStepForm = () => {
   const [step, setStep] = useState(1);
@@ -11,6 +12,8 @@ const MultiStepForm = () => {
     review: '',
     comments: '',
   });
+  const [emailSent, setEmailSent] = useState(false); // New state for email sent status
+  const [emailError, setEmailError] = useState(false); // New state for email error status
 
   const nextStep = () => setStep(step + 1);
   const prevStep = () => setStep(step - 1);
@@ -23,13 +26,40 @@ const MultiStepForm = () => {
     });
   };
 
+  const sendEmail = () => {
+    const serviceID = 'service_3d4toci';
+    const templateID = 'template_cygpec2';
+    const userID = 'U9Snkk7BOs-HNEwxZ';
+
+    emailjs.send(serviceID, templateID, formData, userID)
+      .then((response) => {
+        console.log('Email sent successfully:', response.status, response.text);
+        setEmailSent(true); // Update state to show success message
+      })
+      .catch((error) => {
+        console.error('Failed to send email:', error);
+        setEmailError(true); // Update state to show error message
+      });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    sendEmail();
+  };
+
   switch (step) {
     case 1:
       return <Step1 nextStep={nextStep} handleChange={handleChange} formData={formData} />;
     case 2:
       return <Step2 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />;
     case 3:
-      return <Step3 prevStep={prevStep} formData={formData} />;
+      return (
+        <div>
+          <Step3 prevStep={prevStep} formData={formData} handleSubmit={handleSubmit} />
+          {emailSent && <p className="text-green-500">Your email has been sent successfully!</p>} {/* Success Message */}
+          {emailError && <p className="text-red-500">Failed to send the email. Please try again.</p>} {/* Error Message */}
+        </div>
+      );
     default:
       return null;
   }
